@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Logout Page{% endblock  %}
+{% block body %}
+      
+<div class="container">
+    <div class="row mt-5 pt-3">
+        <div class="col-md-5 offset-md-3 ">
+            <div class="card-body my-5 shadow">
+                <div class="card-body">
+                    <h2>Post Deleted </h2>
+                    <div class="alret alret-danger"></div>
+                        Do You Want to delete the post? <br>
+                </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <a class="btn btn-secondary btn-sm" href="{% url 'post_details' post.id %}">Cancle</a>
+                    <input class="btn btn-primary btn-sm" type="submit" value="Confirm">
+                </form>
+            </div>
+        </div>
+    
+    </div>
+{% endblock  %}

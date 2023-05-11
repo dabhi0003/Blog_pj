@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Profile Page{% endblock  %}
+{% block body %}
+{% load static %}
+<div class="container">
+    <div class="row mt-5 pt-3">
+        <div class="col-md-6 offset-md-3 ">
+            <div class="card-body my-5 shadow">
+                <div class="card-body">
+                    <span class="h4">Profile Page</span>
+                    <!-- Button trigger modal -->
+                    <span>
+                        <button type="button" class="btn btn-info float-right btn-sm" data-toggle="modal" data-target="#exampleModal">
+                            Edit Profile
+                          </button></span>
+                          {% for i in data %}
+                    <div class="row">
+                        <div class="col-md-5">
+                          {% if i.image %}
+                            <img class="img-thumbnail" src="{{ i.image.url }}" alt="alt">
+                            {%else%}
+                            <img class="img-thumbnail" src="{{'/media/profile.jpg'}}" alt="ok">
+                            {% endif %}
+
+                        </div>
+                        <div class="col-md-8">
+                            <h4>User:-{{i.user.username}}</h4>
+                            <h4>Email:-{{i.user.email}}</h4>
+                        </div>
+                        {%endfor%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Profile Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-4">
+              <img class="img-thumbnail" src="{{'/media/profile.jpg'}}"alt="">
+            </div>
+            <div class="col-md-8">
+              <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{u_form}}
+                {{p_form}}
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancle</button>
+                  <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock  %}
